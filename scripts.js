@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Generar PDF dinámico usando jsPDF
+// Generar PDF estático usando jsPDF
 document.querySelector('.download-pdf').addEventListener('click', (event) => {
     event.preventDefault(); // Evita que el enlace recargue la página
 
@@ -133,7 +133,3 @@ document.querySelector('.download-pdf').addEventListener('click', (event) => {
     // Descargar el PDF
     doc.save('curriculum_reiniel.pdf');
 });
-
-
-// Asignar evento al botón de descarga del PDF
-document.querySelector('.download-pdf').addEventListener('click', generatePDF);
