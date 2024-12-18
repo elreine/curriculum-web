@@ -43,5 +43,5 @@ pdfButton.addEventListener("click", (event) => {
     event.preventDefault();
 
     // Descarga directa del archivo PDF desde public
-    window.open('public/curriculum_reiniel.pdf', '_blank');
+    window.open('curriculum_reiniel.pdf', '_blank');
 });
