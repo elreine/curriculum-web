@@ -1,6 +1,7 @@
 {
-    "rewrites": [
-      { "source": "/curriculum_reiniel.pdf", "destination": "/public/curriculum_reiniel.pdf" }
+    "routes": [
+      { "src": "/public/(.*)", "dest": "/public/$1" },
+      { "src": "/(.*)", "dest": "/index.html" }
     ]
   }
   
