@@ -1,98 +1,37 @@
 // scripts.js
 
-// Mostrar un mensaje en la consola al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", function () {
     console.log('Currículum web cargado con éxito');
+    // Inicializa EmailJS
+    emailjs.init("YOUR_USER_ID");
+
+    // Manejar envío del formulario
+    document.getElementById("contact-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        emailjs.sendForm("service_7xu1p7a", "Gmail", this)
+            .then(function () {
+                alert("Mensaje enviado con éxito.");
+                event.target.reset(); // Limpiar formulario después de enviar
+            })
+            .catch(function (error) {
+                alert("Error al enviar el mensaje: " + error);
+            });
+    });
 });
 
-// Función: Validar formulario antes de enviar
-function validateAndSendForm(event) {
-    event.preventDefault();
-
-    // Obtener valores de los campos del formulario
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
-
-    // Validar campos obligatorios
-    if (!name || !email || !message) {
-        alert('Por favor, completa todos los campos antes de enviar.');
-        return;
-    }
-
-    // Validar formato de correo electrónico
-    const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
-    if (!emailPattern.test(email)) {
-        alert('Por favor, ingresa un correo electrónico válido.');
-        return;
-    }
-
-    // Configuración para enviar correo
-    const recipient = "reinelitosecundaria@gmail.com";
-    const subject = `Nuevo mensaje de ${name}`;
-    const body = `Mensaje recibido:\n\n${message}\n\nDe: ${name} (${email})`;
-
-    // Abrir cliente de correo predeterminado
-    window.open(`mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
-
-    alert('¡Gracias por tu mensaje, ' + name + '! Me pondré en contacto contigo pronto.');
-    event.target.reset(); // Limpiar el formulario después de enviar
-}
-
-// Asignar evento al formulario
-document.querySelector('form').addEventListener('submit', validateAndSendForm);
-
-// Función: Animación al hacer scroll en el botón CTA
-const ctaButton = document.querySelector('.cta-button');
-window.addEventListener('scroll', () => {
+// Animación al hacer scroll
+const ctaButton = document.querySelector(".cta-button");
+window.addEventListener("scroll", () => {
     if (window.scrollY > 200) {
-        ctaButton.classList.add('visible');
+        ctaButton.classList.add("visible");
     } else {
-        ctaButton.classList.remove('visible');
-    }
-});
-
-// Configuración y renderización de un gráfico con Chart.js
-document.addEventListener('DOMContentLoaded', () => {
-    const ctx = document.getElementById('skillsChart')?.getContext('2d');
-    if (ctx) {
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Python', 'JavaScript', 'SQL', 'Node.js', 'Firebase'],
-                datasets: [{
-                    label: 'Nivel de Dominio (%)',
-                    data: [85, 80, 75, 70, 60],
-                    backgroundColor: [
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 99, 132, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 99, 132, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
+        ctaButton.classList.remove("visible");
     }
 });
 
 // Generar PDF estático usando jsPDF
-document.querySelector('.download-pdf').addEventListener('click', (event) => {
+document.querySelector(".cta-button").addEventListener("click", (event) => {
     event.preventDefault(); // Evita que el enlace recargue la página
 
     const doc = new jsPDF();
