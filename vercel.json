@@ -1,0 +1,6 @@
+{
+    "rewrites": [
+      { "source": "/curriculum_reiniel.pdf", "destination": "/public/curriculum_reiniel.pdf" }
+    ]
+  }
+  
